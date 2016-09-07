@@ -13,7 +13,7 @@
     <!-- Loading Flat UI -->
     <link href="admin/public/css/flat-ui.min.css" rel="stylesheet">
 
-    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="shortcut icon" href="admin/public/img/favicon.ico">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
@@ -22,21 +22,10 @@
     <![endif]-->
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.1/dragula.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.1/dragula.min.js"></script>
+    <link rel="stylesheet" href="admin/public/css/app/style.css">
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.1/dragula.min.js"></script>-->
+    <script data-main="admin/public/js/app/main" src="admin/public/js/app/vendor/require.min.js"></script>
 
-
-    <style>
-
-      .palette-dark-primary    { background: #00796B; }
-      .palette-default-primary { background: #009688; }
-      .palette-light-primary   { background: #B2DFDB; }
-      .palette-text-primary    { color: #FFFFFF; }
-      .palette-accent          { background: #FF5252; }
-      .palette-primary-text    { color: #212121; }
-      .palette-secondary-text  { color: #727272; }
-      .palette-divider         { border-color: #B6B6B6; }
-
-    </style>
   </head>
   <body>
 
@@ -85,36 +74,6 @@
     </div><!-- /.container-fluid -->
   </nav>
 
-  <style>
-
-    .container {
-      position: relative;
-      transition: opacity .5s;
-    }
-
-    .container.disable {
-       opacity: 0.5;
-    }
-
-    .container .inner-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 0;
-    }
-
-    .container.disable .inner-overlay {
-      z-index: 200;
-    }
-
-    .container.disable .row {
-      z-index: 1;
-    }
-
-  </style>
-
   <div id="main-container" class="container">
     <div class="inner-overlay"></div>
     <div class="row">
@@ -128,62 +87,10 @@
     <div class="row" style="padding:.5em 0;"></div>
 
     <div class="row wrapper" style="display: table; width: calc(100% + 30px); padding: 15px;">
-      <div id="left-scripts" class="col-xs-6 palette palette-clouds" style="display:table-cell; float:none">
-
-        <style>
-          #left-scripts .palette {
-            border-bottom: 1px solid #ecf0f1;
-            position: relative;
-            z-index: 2;
-          }
-
-          #left-scripts:after {
-            content: '';
-            border: 2px dashed #fff;
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            right: 15px;
-            bottom: 15px;
-            z-index: 1;
-          }
-          .padding-hor-10 {
-            padding-right: 10px;
-            padding-left: 10px;
-          }
-
-        </style>
-
-      </div>
-      <div id="right-scripts" class="col-xs-6 palette palette-silver" style="display:table-cell; float:none">
-        <style>
-          #right-scripts .palette {
-            border-bottom: 1px solid #bdc3c7;
-            position: relative;
-            z-index: 2;
-          }
-          #right-scripts:after {
-            content: '';
-            border: 2px dashed #ecf0f1;
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            right: 15px;
-            bottom: 15px;
-            z-index: 1;
-            opacity: .5;
-          }
-        </style>
-
-      </div>
+      <div id="left-scripts" class="col-xs-6 palette palette-clouds" style="display:table-cell; float:none"></div>
+      <div id="right-scripts" class="col-xs-6 palette palette-silver" style="display:table-cell; float:none"></div>
     </div>
   </div>
-
-  <style>
-    #report-container .row {
-      margin-bottom: 15px;
-    }
-  </style>
 
   <div id="report-container" class="container"></div>
     <!-- /.container -->
@@ -197,7 +104,7 @@
 
   <script>
 
-    $(function() {
+    window.ss && $(function() {
 
       var useAutomation = true;
 
@@ -351,7 +258,7 @@
 
       }
 
-      init();
+//      init();
 
 
       var socket = io.connect(location.origin);
@@ -401,23 +308,7 @@
 
   </script>
 
-  <div id="notifications" class="pallete-item" style="
-        position: fixed;
-        top: 5px;
-        right: 5px;
-        z-index: 1000;
-  ">
-    <style>
-      #notifications .item{
-        margin-bottom: 5px;
-        text-transform: none;
-        position: relative;
-        transition: opacity .5s linear;
-        opacity:0;
-      }
-    </style>
-
-  </div>
+  <div id="notifications" class="pallete-item"></div>
 
   </body>
 </html>
