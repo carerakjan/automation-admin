@@ -1,8 +1,8 @@
 define([
     'jquery',
     'socket',
-    'collections/suites'
-], function($, socket, SuitesCollection){
+    'views/main-container'
+], function($, socket, MainContainerView){
     var initialize = function(){
 
         window.jQuery = $;
@@ -11,14 +11,7 @@ define([
             delete window.jQuery;
         });
 
-        var suites = new SuitesCollection();
-        suites.fetch({
-            success: function(data){
-                console.log(data);
-            }, error: function(data){
-                console.log(data);
-            }
-        });
+        new MainContainerView();
     };
 
     var loadFlatUI = function (callback) {

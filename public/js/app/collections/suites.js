@@ -1,7 +1,7 @@
 define([
     'socket',
     'underscore',
-    'Backbone',
+    'backbone',
     'models/suite'
 ], function(socket, _, Backbone, SuiteModel){
 
@@ -9,11 +9,11 @@ define([
 
         model: SuiteModel,
 
-        sync: function(method, model, options) {
+        initialize: function(models, options) {
+            this.view = options.view;
+        },
 
-            options.success && (this.successLoading = options.success);
-            options.error && (this.errorLoading = options.error);
-
+        sync: function(method, model) {
             switch (method) {
                 case 'read': this.loadSuites();
             }
@@ -28,12 +28,12 @@ define([
         errorLoading: function() {},
 
         getListOfAutomation: function(data) {
-
-            if(data.error) return this.errorLoading(data);
-
-            this.add(data);
-
-            this.successLoading(this);
+            if(data.error) {
+                this.view.render(data.error);
+            } else {
+                this.add(data);
+                this.view.render();
+            }
         }
     });
 
