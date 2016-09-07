@@ -1,7 +1,7 @@
 require.config({
     paths: {
-        $: 'vendor/jquery.min',
-        _: 'vendor/underscore.min',
+        jquery: 'vendor/jquery.min',
+        underscore: 'vendor/underscore.min',
         Backbone: 'vendor/backbone.min',
         dragula: 'vendor/dragula.min'
     }

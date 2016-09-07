@@ -1,6 +1,6 @@
 define([
     'socket',
-    '_',
+    'underscore',
     'Backbone',
     'models/suite'
 ], function(socket, _, Backbone, SuiteModel){
@@ -34,14 +34,6 @@ define([
             this.add(data);
 
             this.successLoading(this);
-
-            //console.log(data);
-            //if(data.error) {
-            //    $('.row.wrapper').html('<div class="palette palette-pomegranate text-center">'+ data.error + '</div>');
-            //} else {
-            //    renderList(data);
-            //    initDragAndDrop();
-            //}
         }
     });
 
