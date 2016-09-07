@@ -23,10 +23,6 @@ define([
             socket.emit('list_of_test_suites', null, this.getListOfAutomation.bind(this));
         },
 
-        successLoading: function() {},
-
-        errorLoading: function() {},
-
         getListOfAutomation: function(data) {
             if(data.error) {
                 this.view.render(data.error);
