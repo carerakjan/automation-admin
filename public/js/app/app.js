@@ -1,19 +1,24 @@
 define([
+    'jquery',
     'socket',
-    'collections/suites'
-], function(socket, SuitesCollection){
+    'views/main-container'
+], function($, socket, MainContainerView){
     var initialize = function(){
-        socket.connect();
 
-        var suites = new SuitesCollection();
+        window.jQuery = $;
 
-        suites.fetch({
-            success: function(data){
-                console.log(data);
-            }, error: function(data){
-                console.log(data);
-            }
+        loadFlatUI(function() {
+            delete window.jQuery;
         });
+
+        new MainContainerView();
+    };
+
+    var loadFlatUI = function (callback) {
+        var script = document.createElement('script');
+        script.src = "admin/public/js/flat-ui.min.js";
+        document.body.appendChild(script);
+        callback && (script.onload = callback);
     };
 
     return {

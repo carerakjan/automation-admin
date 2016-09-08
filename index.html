@@ -2,313 +2,269 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Flat UI Free 101 Template</title>
+    <title>Automation Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <script src="/socket.io/socket.io.js"></script>
 
     <!-- Loading Bootstrap -->
     <link href="admin/public/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Loading Flat UI -->
     <link href="admin/public/css/flat-ui.min.css" rel="stylesheet">
-
     <link rel="shortcut icon" href="admin/public/img/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.1/dragula.min.css">
+    <link rel="stylesheet" href="admin/public/css/app/style.css">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
     <!--[if lt IE 9]>
-      <script src="admin/public/js/vendor/html5shiv.js"></script>
-      <script src="admin/public/js/vendor/respond.min.js"></script>
+    <script src="admin/public/js/vendor/html5shiv.js"></script>
+    <script src="admin/public/js/vendor/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.1/dragula.min.css">
-    <link rel="stylesheet" href="admin/public/css/app/style.css">
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.1/dragula.min.js"></script>-->
-    <script data-main="admin/public/js/app/main" src="admin/public/js/app/vendor/require.min.js"></script>
-
+    <script src="/socket.io/socket.io.js"></script>
+    <script data-main="admin/public/js/app/main" src="admin/public/js/vendor/require.min.js"></script>
   </head>
+
   <body>
-
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Admin panel</a>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-        <form class="navbar-form navbar-left" id="form-runBs">
-
-          <div class="input-group">
-            <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Run</button>
-            </span>
-            <input id="urlInput" name="urlInput" type="text" class="form-control" placeholder="Portal URL" style="width: 50vw">
-          </div>
-          <div class="input-group">
-            <select id="platform" name="platform" class="form-control">
-              <option value="all" selected="selected">all</option>
-              <option value="mobile">mobile</option>
-              <option value="tablet">tablet</option>
-              <option value="desktop">desktop</option>
-            </select>
-          </div>
-
-          <div style="padding:0 .5em; display:inline; height: 0"></div>
-
-            <label class="checkbox" for="useAutomation">
-              <input type="checkbox" checked value="" id="useAutomation" name="useAutomation" data-toggle="checkbox" class="custom-checkbox"><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
-              Use auto script
-            </label>
-
-        </form>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
-
-  <div id="main-container" class="container">
-    <div class="inner-overlay"></div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="palette palette-turquoise text-center">
-          Please move items from left to right and then sort a sequence if is need
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Admin panel</a>
         </div>
-      </div>
-    </div>
 
-    <div class="row" style="padding:.5em 0;"></div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-    <div class="row wrapper" style="display: table; width: calc(100% + 30px); padding: 15px;">
-      <div id="left-scripts" class="col-xs-6 palette palette-clouds" style="display:table-cell; float:none"></div>
-      <div id="right-scripts" class="col-xs-6 palette palette-silver" style="display:table-cell; float:none"></div>
-    </div>
-  </div>
+          <form class="navbar-form navbar-left" id="form-runBs">
 
-  <div id="report-container" class="container"></div>
-    <!-- /.container -->
+            <div class="input-group">
+              <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">Run</button>
+              </span>
+              <input id="urlInput" name="urlInput" type="text" class="form-control" placeholder="Portal URL" style="width: 50vw">
+            </div>
+            <div class="input-group">
+              <select id="platform" name="platform" class="form-control">
+                <option value="all" selected="selected">all</option>
+                <option value="mobile">mobile</option>
+                <option value="tablet">tablet</option>
+                <option value="desktop">desktop</option>
+              </select>
+            </div>
 
+            <div style="padding:0 .5em; display:inline; height: 0"></div>
 
-    <!-- jQuery (necessary for Flat UI's JavaScript plugins) -->
-    <script src="admin/public/js/vendor/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <!--<script src="js/vendor/video.js"></script>-->
-    <script src="admin/public/js/flat-ui.min.js"></script>
+              <label class="checkbox" for="useAutomation">
+                <input type="checkbox" checked value="" id="useAutomation" name="useAutomation" data-toggle="checkbox" class="custom-checkbox"><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
+                Use auto script
+              </label>
 
-  <script>
+          </form>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <div id="main-container" class="container"></div>
+    <div id="report-container" class="container"></div>
+    <script>
 
-    window.ss && $(function() {
+      window.ss && $(function() {
 
-      var useAutomation = true;
+        var useAutomation = true;
 
-      function initDragAndDrop() {
-        dragula && dragula([].slice.call($('[id$="-scripts"]')),{
-          copy: function (el, source) {
-            return source === document.getElementById('left-scripts');
-          },
-          accepts: function (el, target) {
-            return target !== document.getElementById('left-scripts')
-          }
-        }).on('drop', function (el, container) {
-          if(container && container.id === 'right-scripts') {
-            $(el).find('[class^=fui]')
-              .removeClass('fui-arrow-right')
-              .addClass('fui-cross')
-              .on('click', function() {
-                $(this).closest('div.palette').remove();
-              });
-          }
-        });
-      }
-
-      function onChangeAutomation(event) {
-        if(event.target.checked) {
-          useAutomation = true;
-          $('#main-container').removeClass('disable');
-        } else {
-          useAutomation = false;
-          $('#main-container').addClass('disable');
-        }
-      }
-
-      function onSubmitForm(event) {
-
-        var re = /^\s*(((ht|f)tp(s?))\:\/\/)?(www.|[a-zA-Z].)[a-zA-Z0-9\-\.]+\.([a-z]{2,6})(\:[0-9]+)*(\/($|[a-zA-Z0-9\.\,\;\?\'\\\+&amp;%\$#\=~_\-]+))*\s*$/;
-
-        $('#report-container').empty();
-
-        var data = {};
-        data.url = $('#urlInput').val();
-        var e = document.getElementById("platform");
-        data.platform = e.options[e.selectedIndex].value;
-
-        if(!data.url){
-          alert('URL is required');
-          return;
-        } else if(!re.test(data.url)) {
-          alert('URL validation error');
-        }
-
-        if(useAutomation) {
-          var autoTests = $('#right-scripts .palette .item');
-
-          if(autoTests.length) {
-
-            [].forEach.call(autoTests, function(item) {
-              !data.js && (data.js = []);
-              data.js.push($(item).html());
-            });
-
-            if(data.js) {
-              data.js = data.js.join('_');
+        function initDragAndDrop() {
+          dragula && dragula([].slice.call($('[id$="-scripts"]')),{
+            copy: function (el, source) {
+              return source === document.getElementById('left-scripts');
+            },
+            accepts: function (el, target) {
+              return target !== document.getElementById('left-scripts')
             }
-          }
-        }
-
-        $.ajax({
-          type: "POST",
-          url: '/run_bs',
-          data: data,
-          dataType: 'json'
-        });
-
-        return false;
-      }
-
-      function renderList(data) {
-
-        $('#left-scripts').append(data.map(function(item){
-          return $('<div class="palette palette-asbestos">' +
-                  '<span class="item padding-hor-10">' + item + '</span>' +
-                  '<span class="fui-arrow-right pull-right"></span></div>')
-        }));
-
-      }
-
-      function renderReport(data) {
-        if(!data) return;
-        var row = $('<div class="row"><div class="col-xs-12"><table width="100%"></table></div></div>');
-        var table = row.find('table');
-        table.append($('<thead><tr><td colspan="3" class="palette palette-peter-river" style="border-bottom: 1px solid #eee">Device Info : ' + data.device + '<span class="pull-right fui-triangle-up-small report-head report-show" style="cursor: pointer"></span></td></tr></thead>'));
-        var tbody = $('<tbody/>');
-        table.append(tbody);
-
-        data.log.forEach(function(suite) {
-          tbody.append($('<tr><th class="palette palette-silver" style="border-right: 1px solid #eee">' + suite.title + '</th><th class="palette palette-silver" style="width: 150px; border-right: 1px solid #eee">Execution</th><th class="palette palette-silver" style="width: 150px">Status</th></tr>'));
-
-          suite.steps.forEach(function(step) {
-            if(step.result[1] === 'ok') {
-              tbody.append($('<tr><td class="palette palette-turquoise" style="border-right: 1px solid #eee">' + step.title + '</td><td class="palette palette-turquoise"  style="border-right: 1px solid #eee">' + step.result[0] + '</td><td class="palette palette-turquoise">OK</td></tr>'));
-            } else {
-              tbody.append($('<tr><td class="palette palette-accent" style="border-right: 1px solid #eee">' + step.title + '</td><td class="palette palette-accent"  style="border-right: 1px solid #eee">' + step.result[0] + '</td><td class="palette palette-accent" style="text-transform: none;">' + step.result[2] + '</td></tr>'));
+          }).on('drop', function (el, container) {
+            if(container && container.id === 'right-scripts') {
+              $(el).find('[class^=fui]')
+                .removeClass('fui-arrow-right')
+                .addClass('fui-cross')
+                .on('click', function() {
+                  $(this).closest('div.palette').remove();
+                });
             }
           });
-
-        });
-
-        row.find('.report-head').on('click', function(event) {
-          event.preventDefault();
-          toggleReport(this, tbody);
-        });
-
-        var container = $('#report-container');
-        var children = container.children();
-        if(children.length) {
-          var first = children[0];
-          $(first).before(row);
-        } else {
-          container.append(row);
         }
-      }
 
-      function toggleReport(self, body) {
-        if($(self).hasClass('report-show')) {
-          $(self).removeClass('fui-triangle-up-small report-show');
-          $(self).addClass('fui-triangle-down-small report-hide');
-          body.fadeOut(200);
-        } else {
-          $(self).addClass('fui-triangle-up-small report-show');
-          $(self).removeClass('fui-triangle-down-small report-hide');
-          body.fadeIn(200);
-        }
-      }
-
-      function loadListOfAutomation() {
-        return $.get('/get_tests_suite');
-      }
-
-      function init() {
-        $('#form-runBs').on('submit', onSubmitForm);
-        $('#form-runBs button').on('click', onSubmitForm);
-        $('#useAutomation').on('change', onChangeAutomation);
-        loadListOfAutomation().done(function(data){
-          renderList(data);
-          initDragAndDrop();
-        }).fail(function(error){
-          $('.row.wrapper').html('<div class="palette palette-pomegranate text-center">' +
-                  JSON.parse(error.responseText).error + '</div>');
-        });
-
-      }
-
-//      init();
-
-
-      var socket = io.connect(location.origin);
-      socket.on('automation_report', function (data) {
-        renderReport(data);
-        console.log(data);
-      });
-
-      socket.on('notification', function (data) {
-
-        var options = {};
-
-        if(data.connection) {
-          if(data.connection[1] === 'connect') {
-            options.message = 'New connection';
-            options.cls = 'pumpkin';
-          } else if(data.connection[1] === 'reconnect') {
-            options.message = 'Connection reloaded';
-            options.cls = 'belize-hole';
+        function onChangeAutomation(event) {
+          if(event.target.checked) {
+            useAutomation = true;
+            $('#main-container').removeClass('disable');
+          } else {
+            useAutomation = false;
+            $('#main-container').addClass('disable');
           }
         }
 
-        var ntf = createNotificationItem(options);
+        function onSubmitForm(event) {
 
-        ntf.appendTo($('#notifications')).css({
-          opacity:.8
+          var re = /^\s*(((ht|f)tp(s?))\:\/\/)?(www.|[a-zA-Z].)[a-zA-Z0-9\-\.]+\.([a-z]{2,6})(\:[0-9]+)*(\/($|[a-zA-Z0-9\.\,\;\?\'\\\+&amp;%\$#\=~_\-]+))*\s*$/;
+
+          $('#report-container').empty();
+
+          var data = {};
+          data.url = $('#urlInput').val();
+          var e = document.getElementById("platform");
+          data.platform = e.options[e.selectedIndex].value;
+
+          if(!data.url){
+            alert('URL is required');
+            return;
+          } else if(!re.test(data.url)) {
+            alert('URL validation error');
+          }
+
+          if(useAutomation) {
+            var autoTests = $('#right-scripts .palette .item');
+
+            if(autoTests.length) {
+
+              [].forEach.call(autoTests, function(item) {
+                !data.js && (data.js = []);
+                data.js.push($(item).html());
+              });
+
+              if(data.js) {
+                data.js = data.js.join('_');
+              }
+            }
+          }
+
+          $.ajax({
+            type: "POST",
+            url: '/run_bs',
+            data: data,
+            dataType: 'json'
+          });
+
+          return false;
+        }
+
+        function renderReport(data) {
+          if(!data) return;
+          var row = $('<div class="row"><div class="col-xs-12"><table width="100%"></table></div></div>');
+          var table = row.find('table');
+          table.append($('<thead><tr><td colspan="3" class="palette palette-peter-river" style="border-bottom: 1px solid #eee">Device Info : ' + data.device + '<span class="pull-right fui-triangle-up-small report-head report-show" style="cursor: pointer"></span></td></tr></thead>'));
+          var tbody = $('<tbody/>');
+          table.append(tbody);
+
+          data.log.forEach(function(suite) {
+            tbody.append($('<tr><th class="palette palette-silver" style="border-right: 1px solid #eee">' + suite.title + '</th><th class="palette palette-silver" style="width: 150px; border-right: 1px solid #eee">Execution</th><th class="palette palette-silver" style="width: 150px">Status</th></tr>'));
+
+            suite.steps.forEach(function(step) {
+              if(step.result[1] === 'ok') {
+                tbody.append($('<tr><td class="palette palette-turquoise" style="border-right: 1px solid #eee">' + step.title + '</td><td class="palette palette-turquoise"  style="border-right: 1px solid #eee">' + step.result[0] + '</td><td class="palette palette-turquoise">OK</td></tr>'));
+              } else {
+                tbody.append($('<tr><td class="palette palette-accent" style="border-right: 1px solid #eee">' + step.title + '</td><td class="palette palette-accent"  style="border-right: 1px solid #eee">' + step.result[0] + '</td><td class="palette palette-accent" style="text-transform: none;">' + step.result[2] + '</td></tr>'));
+              }
+            });
+
+          });
+
+          row.find('.report-head').on('click', function(event) {
+            event.preventDefault();
+            toggleReport(this, tbody);
+          });
+
+          var container = $('#report-container');
+          var children = container.children();
+          if(children.length) {
+            var first = children[0];
+            $(first).before(row);
+          } else {
+            container.append(row);
+          }
+        }
+
+        function toggleReport(self, body) {
+          if($(self).hasClass('report-show')) {
+            $(self).removeClass('fui-triangle-up-small report-show');
+            $(self).addClass('fui-triangle-down-small report-hide');
+            body.fadeOut(200);
+          } else {
+            $(self).addClass('fui-triangle-up-small report-show');
+            $(self).removeClass('fui-triangle-down-small report-hide');
+            body.fadeIn(200);
+          }
+        }
+
+        function loadListOfAutomation() {
+          return $.get('/get_tests_suite');
+        }
+
+        function init() {
+          $('#form-runBs').on('submit', onSubmitForm);
+          $('#form-runBs button').on('click', onSubmitForm);
+          $('#useAutomation').on('change', onChangeAutomation);
+          loadListOfAutomation().done(function(data){
+            renderList(data);
+            initDragAndDrop();
+          }).fail(function(error){
+            $('.row.wrapper').html('<div class="palette palette-pomegranate text-center">' +
+                    JSON.parse(error.responseText).error + '</div>');
+          });
+
+        }
+
+  //      init();
+
+
+        var socket = io.connect(location.origin);
+        socket.on('automation_report', function (data) {
+          renderReport(data);
+          console.log(data);
         });
 
-        setTimeout(function(){
-            ntf.css({opacity:0});
-        }, 2000);
+        socket.on('notification', function (data) {
 
-        setTimeout(function(){
-          ntf.remove();
-        }, 2500);
+          var options = {};
+
+          if(data.connection) {
+            if(data.connection[1] === 'connect') {
+              options.message = 'New connection';
+              options.cls = 'pumpkin';
+            } else if(data.connection[1] === 'reconnect') {
+              options.message = 'Connection reloaded';
+              options.cls = 'belize-hole';
+            }
+          }
+
+          var ntf = createNotificationItem(options);
+
+          ntf.appendTo($('#notifications')).css({
+            opacity:.8
+          });
+
+          setTimeout(function(){
+              ntf.css({opacity:0});
+          }, 2000);
+
+          setTimeout(function(){
+            ntf.remove();
+          }, 2500);
+
+        });
+
+        function createNotificationItem(options) {
+          return $('<dl class="palette palette-' + options.cls + ' text-center item">' + options.message + '</dl>')
+        }
+
+
 
       });
 
-      function createNotificationItem(options) {
-        return $('<dl class="palette palette-' + options.cls + ' text-center item">' + options.message + '</dl>')
-      }
 
-
-
-    });
-
-
-  </script>
-
-  <div id="notifications" class="pallete-item"></div>
-
+    </script>
+    <div id="notifications" class="pallete-item"></div>
   </body>
 </html>

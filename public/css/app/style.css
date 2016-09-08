@@ -8,6 +8,20 @@
 .palette-divider         { border-color: #B6B6B6; }
 
 
+/*--- main-container ---*/
+#main-container .wrapper {
+    display: table;
+    width: calc(100% + 30px);
+    padding: 15px;
+}
+
+#left-scripts,
+#right-scripts {
+    display:table-cell;
+    float:none
+}
+
+
 .container {
     position: relative;
     transition: opacity .5s;

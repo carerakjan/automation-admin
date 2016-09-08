@@ -1,0 +1,34 @@
+<div class="inner-overlay"></div>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="palette palette-turquoise text-center">
+            Please move items from left to right and then sort a sequence if is need
+        </div>
+    </div>
+</div>
+
+<div class="row" style="padding:.5em 0;"></div>
+
+<div class="row wrapper">
+    <% if(!data.error) { %>
+    <div id="left-scripts" class="col-xs-6 palette palette-clouds">
+
+        <% _.each(data, function(suite){ %>
+
+        <div class="palette palette-asbestos">
+            <span class="item padding-hor-10">
+                <%= suite.get('metaData') && suite.get('metaData').title
+                ? suite.get('metaData').title : suite.get('id') %>
+            </span>
+            <span class="fui-arrow-right pull-right"></span>
+        </div>
+
+        <% }); %>
+    </div>
+    <div id="right-scripts" class="col-xs-6 palette palette-silver"></div>
+    <% } else { %>
+    <div class="palette palette-pomegranate text-center">
+        <%= data.error %>
+    </div>
+    <% } %>
+</div>
