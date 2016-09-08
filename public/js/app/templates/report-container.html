@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-xs-12">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td colspan="3" class="palette palette-peter-river" style="border-bottom: 1px solid #eee">
+                        Device Info : <%= device %>
+                        <span class="pull-right fui-triangle-up-small report-head report-show" style="cursor: pointer"></span>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <% _.each(log, function(suite) { %>
+
+                    <tr>
+                        <th class="palette palette-silver" style="border-right: 1px solid #eee"><%= suite.title %></th>
+                        <th class="palette palette-silver" style="width: 150px; border-right: 1px solid #eee">Execution</th>
+                        <th class="palette palette-silver" style="width: 150px">Status</th>
+                    </tr>
+
+                    <% _.each(suite.steps, function(step) { %>
+
+                        <% if(step.result[1] === 'ok') { %>
+                            <tr>
+                                <td class="palette palette-turquoise" style="border-right: 1px solid #eee"><%= step.title %></td>
+                                <td class="palette palette-turquoise"  style="border-right: 1px solid #eee"><%= step.result[0] %></td>
+                                <td class="palette palette-turquoise">OK</td>
+                            </tr>
+
+                        <% } else { %>
+
+                            <tr>
+                                <td class="palette palette-accent" style="border-right: 1px solid #eee"><%= step.title %></td>
+                                <td class="palette palette-accent"  style="border-right: 1px solid #eee"><%= step.result[0] %></td>
+                                <td class="palette palette-accent" style="text-transform: none;"><%= step.result[2] %></td>
+                            </tr>
+
+                        <% } %>
+
+                    <% }) %>
+
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -2,8 +2,9 @@ define([
     'jquery',
     'backbone',
     'underscore',
-    'views/main-container'
-], function($, Backbone, _, MainContainerView){
+    'views/main-container',
+    'views/report-container'
+], function($, Backbone, _, MainContainerView, ReportContainerView){
 
     var loadFlatUI = function (callback) {
         var script = document.createElement('script');
@@ -21,7 +22,11 @@ define([
                 delete window.jQuery;
             });
 
-            this.views.push(new MainContainerView({ name: 'main-container', app: this }));
+            this.views.push(new MainContainerView(this.getViewParams('main-container')));
+            this.views.push(new ReportContainerView(this.getViewParams('report-container')));
+        },
+        getViewParams: function(id) {
+            return { name: id, app: this };
         }
     }, Backbone.Events);
 
