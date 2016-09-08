@@ -1,16 +1,17 @@
 define([
     'jquery',
     'underscore',
-    'backbone',
+    'common/base.view',
     'dragula',
     'collections/suites',
     'text!templates/main-container.html'
-], function($, _, Backbone, dragula, SuitesCollection, mainContainerTemplate){
-    return Backbone.View.extend({
+], function($, _, BaseView, dragula, SuitesCollection, mainContainerTemplate){
+    return BaseView.extend({
 
         el: $("#main-container"),
 
         initialize: function(){
+            BaseView.prototype.initialize.apply(this, arguments);
             this.collection = new SuitesCollection();
             this.listenTo(this.collection, 'fetch:error fetch:success', this.render.bind(this));
             this.collection.fetch();

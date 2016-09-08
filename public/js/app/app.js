@@ -1,18 +1,9 @@
 define([
     'jquery',
-    'socket',
+    'backbone',
+    'underscore',
     'views/main-container'
-], function($, socket, MainContainerView){
-    var initialize = function(){
-
-        window.jQuery = $;
-
-        loadFlatUI(function() {
-            delete window.jQuery;
-        });
-
-        new MainContainerView();
-    };
+], function($, Backbone, _, MainContainerView){
 
     var loadFlatUI = function (callback) {
         var script = document.createElement('script');
@@ -21,7 +12,16 @@ define([
         callback && (script.onload = callback);
     };
 
-    return {
-        initialize: initialize
-    };
+    return _.extend({
+        initialize: function() {
+            window.jQuery = $;
+
+            loadFlatUI(function() {
+                delete window.jQuery;
+            });
+
+            new MainContainerView({ app: this });
+        }
+    }, Backbone.Events);
+
 });

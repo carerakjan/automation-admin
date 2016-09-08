@@ -76,26 +76,6 @@
 
         var useAutomation = true;
 
-        function initDragAndDrop() {
-          dragula && dragula([].slice.call($('[id$="-scripts"]')),{
-            copy: function (el, source) {
-              return source === document.getElementById('left-scripts');
-            },
-            accepts: function (el, target) {
-              return target !== document.getElementById('left-scripts')
-            }
-          }).on('drop', function (el, container) {
-            if(container && container.id === 'right-scripts') {
-              $(el).find('[class^=fui]')
-                .removeClass('fui-arrow-right')
-                .addClass('fui-cross')
-                .on('click', function() {
-                  $(this).closest('div.palette').remove();
-                });
-            }
-          });
-        }
-
         function onChangeAutomation(event) {
           if(event.target.checked) {
             useAutomation = true;
