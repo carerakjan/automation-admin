@@ -13,6 +13,7 @@ define([
     };
 
     return _.extend({
+        views: [],
         initialize: function() {
             window.jQuery = $;
 
@@ -20,7 +21,7 @@ define([
                 delete window.jQuery;
             });
 
-            new MainContainerView({ app: this });
+            this.views.push(new MainContainerView({ name: 'main-container', app: this }));
         }
     }, Backbone.Events);
 
