@@ -9,10 +9,6 @@ define([
 
         model: SuiteModel,
 
-        initialize: function(models, options) {
-            this.view = options.view;
-        },
-
         sync: function(method, model) {
             switch (method) {
                 case 'read': this.loadSuites();
@@ -25,10 +21,10 @@ define([
 
         getListOfAutomation: function(data) {
             if(data.error) {
-                this.view.render(data.error);
+                this.trigger('fetch:error', data.error);
             } else {
                 this.add(data);
-                this.view.render();
+                this.trigger('fetch:success');
             }
         }
     });

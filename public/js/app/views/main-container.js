@@ -11,7 +11,8 @@ define([
         el: $("#main-container"),
 
         initialize: function(){
-            this.collection = new SuitesCollection(null, { view: this });
+            this.collection = new SuitesCollection();
+            this.collection.on('fetch:error fetch:success', this.render.bind(this));
             this.collection.fetch();
         },
 
