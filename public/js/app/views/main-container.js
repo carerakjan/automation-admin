@@ -10,6 +10,8 @@ define([
 
         el: $("#main-container"),
 
+        _templateString: mainContainerTemplate,
+
         initialize: function(){
             BaseView.prototype.initialize.apply(this, arguments);
             this.collection = new SuitesCollection();
@@ -29,10 +31,6 @@ define([
                 this.$el.html(this.template({ data: this.collection.models }));
                 this.initDragAndDrop();
             }
-        },
-
-        template: function(data) {
-            return _.template(mainContainerTemplate)(data);
         },
 
         initDragAndDrop: function() {
