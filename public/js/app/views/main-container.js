@@ -14,7 +14,12 @@ define([
             BaseView.prototype.initialize.apply(this, arguments);
             this.collection = new SuitesCollection();
             this.listenTo(this.collection, 'fetch:error fetch:success', this.render.bind(this));
+            this.options.app && this.options.app.on('app:useAutomation', this.toggleElement.bind(this));
             this.collection.fetch();
+        },
+
+        toggleElement: function(isUseAutomation) {
+            this.$el[isUseAutomation ? 'removeClass' : 'addClass']('disable');
         },
 
         render: function(error) {
