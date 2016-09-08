@@ -16,13 +16,9 @@ define([
         },
 
         loadSuites: function() {
-            socket.emit('list_of_test_suites', null, this.getListOfAutomation.bind(this));
-        },
-
-        getListOfAutomation: function(data) {
-            if(data.error) this.fetchError(data);
-            else this.fetchSuccess(data);
+            socket.emit('list_of_test_suites', null, this.handleFetchingData.bind(this));
         }
+
     });
 
 });
