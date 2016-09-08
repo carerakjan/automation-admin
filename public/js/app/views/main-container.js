@@ -12,7 +12,7 @@ define([
 
         initialize: function(){
             this.collection = new SuitesCollection();
-            this.collection.on('fetch:error fetch:success', this.render.bind(this));
+            this.listenTo(this.collection, 'fetch:error fetch:success', this.render.bind(this));
             this.collection.fetch();
         },
 

@@ -1,15 +1,15 @@
 define([
     'socket',
     'underscore',
-    'backbone',
+    'common/base.collection',
     'models/suite'
-], function(socket, _, Backbone, SuiteModel){
+], function(socket, _, BaseCollection, SuiteModel){
 
-    var ProjectCollection = Backbone.Collection.extend({
+    return BaseCollection.extend({
 
         model: SuiteModel,
 
-        sync: function(method, model) {
+        sync: function(method) {
             switch (method) {
                 case 'read': this.loadSuites();
             }
@@ -20,14 +20,9 @@ define([
         },
 
         getListOfAutomation: function(data) {
-            if(data.error) {
-                this.trigger('fetch:error', data.error);
-            } else {
-                this.add(data);
-                this.trigger('fetch:success');
-            }
+            if(data.error) this.fetchError(data);
+            else this.fetchSuccess(data);
         }
     });
 
-    return ProjectCollection;
 });
