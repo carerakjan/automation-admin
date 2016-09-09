@@ -129,6 +129,5 @@
     margin-bottom: 5px;
     text-transform: none;
     position: relative;
-    transition: opacity .5s linear;
     opacity:0;
 }

@@ -130,69 +130,17 @@
           return false;
         }
 
-        function renderReport(data) {
-          if(!data) return;
-          var row = $('<div class="row"><div class="col-xs-12"><table width="100%"></table></div></div>');
-          var table = row.find('table');
-          table.append($('<thead><tr><td colspan="3" class="palette palette-peter-river" style="border-bottom: 1px solid #eee">Device Info : ' + data.device + '<span class="pull-right fui-triangle-up-small report-head report-show" style="cursor: pointer"></span></td></tr></thead>'));
-          var tbody = $('<tbody/>');
-          table.append(tbody);
 
-          data.log.forEach(function(suite) {
-            tbody.append($('<tr><th class="palette palette-silver" style="border-right: 1px solid #eee">' + suite.title + '</th><th class="palette palette-silver" style="width: 150px; border-right: 1px solid #eee">Execution</th><th class="palette palette-silver" style="width: 150px">Status</th></tr>'));
 
-            suite.steps.forEach(function(step) {
-              if(step.result[1] === 'ok') {
-                tbody.append($('<tr><td class="palette palette-turquoise" style="border-right: 1px solid #eee">' + step.title + '</td><td class="palette palette-turquoise"  style="border-right: 1px solid #eee">' + step.result[0] + '</td><td class="palette palette-turquoise">OK</td></tr>'));
-              } else {
-                tbody.append($('<tr><td class="palette palette-accent" style="border-right: 1px solid #eee">' + step.title + '</td><td class="palette palette-accent"  style="border-right: 1px solid #eee">' + step.result[0] + '</td><td class="palette palette-accent" style="text-transform: none;">' + step.result[2] + '</td></tr>'));
-              }
-            });
 
-          });
 
-          row.find('.report-head').on('click', function(event) {
-            event.preventDefault();
-            toggleReport(this, tbody);
-          });
 
-          var container = $('#report-container');
-          var children = container.children();
-          if(children.length) {
-            var first = children[0];
-            $(first).before(row);
-          } else {
-            container.append(row);
-          }
-        }
-
-        function toggleReport(self, body) {
-          if($(self).hasClass('report-show')) {
-            $(self).removeClass('fui-triangle-up-small report-show');
-            $(self).addClass('fui-triangle-down-small report-hide');
-            body.fadeOut(200);
-          } else {
-            $(self).addClass('fui-triangle-up-small report-show');
-            $(self).removeClass('fui-triangle-down-small report-hide');
-            body.fadeIn(200);
-          }
-        }
-
-        function loadListOfAutomation() {
-          return $.get('/get_tests_suite');
-        }
 
         function init() {
           $('#form-runBs').on('submit', onSubmitForm);
           $('#form-runBs button').on('click', onSubmitForm);
           $('#useAutomation').on('change', onChangeAutomation);
-          loadListOfAutomation().done(function(data){
-            renderList(data);
-            initDragAndDrop();
-          }).fail(function(error){
-            $('.row.wrapper').html('<div class="palette palette-pomegranate text-center">' +
-                    JSON.parse(error.responseText).error + '</div>');
-          });
+
 
         }
 
@@ -200,10 +148,6 @@
 
 
         var socket = io.connect(location.origin);
-        socket.on('automation_report', function (data) {
-          renderReport(data);
-          console.log(data);
-        });
 
         socket.on('notification', function (data) {
 

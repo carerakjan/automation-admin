@@ -3,8 +3,9 @@ define([
     'backbone',
     'underscore',
     'views/main-container',
-    'views/report-container'
-], function($, Backbone, _, MainContainerView, ReportContainerView){
+    'views/report-container',
+    'views/notifications'
+], function($, Backbone, _, MainContainerView, ReportContainerView, NotificationsView){
 
     var loadFlatUI = function (callback) {
         var script = document.createElement('script');
@@ -24,6 +25,7 @@ define([
 
             this.views.push(new MainContainerView(this.getViewParams('main-container')));
             this.views.push(new ReportContainerView(this.getViewParams('report-container')));
+            this.views.push(new NotificationsView(this.getViewParams('notifications')));
         },
         getViewParams: function(id) {
             return { name: id, app: this };

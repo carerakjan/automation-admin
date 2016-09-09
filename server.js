@@ -36,6 +36,10 @@ io.on('connection', function (socket) {
         ],
         "device":"Chrome 52.0.2743.116 32-bit on Windows 8.1 64-bit"
     });
+    socket.emit('notification', {connection:['socketID718', 'connect']});
+    setTimeout(function(){
+        socket.emit('notification', {connection:['socketID718', 'reconnect']});
+    }, 1000);
 });
 
 server.listen(9876);
