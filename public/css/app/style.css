@@ -8,6 +8,14 @@
 .palette-divider         { border-color: #B6B6B6; }
 
 
+.transition {
+    -moz-transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+
 /*--- main-container ---*/
 #main-container .wrapper {
     display: table;
@@ -93,6 +101,19 @@
 
 #report-container .row {
     margin-bottom: 15px;
+}
+
+#report-container .collapsible {
+    max-height: 9999px;
+    overflow: hidden;
+}
+
+#report-container .report-hide {
+    transform: rotate(180deg);
+}
+
+#report-container .collapsible.narrow-down {
+    max-height: 46px;
 }
 
 /*--- notifications ---*/

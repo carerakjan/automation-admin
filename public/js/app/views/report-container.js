@@ -41,19 +41,16 @@ define([
         },
 
         toggleReport: function(event) {
-
             event.preventDefault();
             var element = this.$(event.target);
-            var tBody = element.closest('table').find('tbody');
+            var container = element.closest('.collapsible');
 
             if(element.hasClass('report-show')) {
-                element.removeClass('fui-triangle-up-small report-show');
-                element.addClass('fui-triangle-down-small report-hide');
-                tBody.fadeOut(200);
+                element.removeClass('report-show').addClass('report-hide');
+                container.addClass('narrow-down');
             } else {
-                element.addClass('fui-triangle-up-small report-show');
-                element.removeClass('fui-triangle-down-small report-hide');
-                tBody.fadeIn(200);
+                element.addClass('report-show').removeClass('report-hide');
+                container.removeClass('narrow-down');
             }
         }
 
