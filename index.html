@@ -74,7 +74,6 @@
 
       window.ss && $(function() {
 
-        var useAutomation = true;
 
         function onChangeAutomation(event) {
           if(event.target.checked) {
@@ -143,46 +142,6 @@
 
 
         }
-
-  //      init();
-
-
-        var socket = io.connect(location.origin);
-
-        socket.on('notification', function (data) {
-
-          var options = {};
-
-          if(data.connection) {
-            if(data.connection[1] === 'connect') {
-              options.message = 'New connection';
-              options.cls = 'pumpkin';
-            } else if(data.connection[1] === 'reconnect') {
-              options.message = 'Connection reloaded';
-              options.cls = 'belize-hole';
-            }
-          }
-
-          var ntf = createNotificationItem(options);
-
-          ntf.appendTo($('#notifications')).css({
-            opacity:.8
-          });
-
-          setTimeout(function(){
-              ntf.css({opacity:0});
-          }, 2000);
-
-          setTimeout(function(){
-            ntf.remove();
-          }, 2500);
-
-        });
-
-        function createNotificationItem(options) {
-          return $('<dl class="palette palette-' + options.cls + ' text-center item">' + options.message + '</dl>')
-        }
-
 
 
       });
