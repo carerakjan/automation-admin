@@ -49,7 +49,9 @@ define([
                 if(!re.test(url)) throw Error('URL validation error');
                 return true;
             } catch (e) {
-                return alert(e.message);
+                return this.options.app.trigger('app:notify', {
+                    connection: [null, 'error', e.message]
+                });
             }
         },
 
