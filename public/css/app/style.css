@@ -115,8 +115,12 @@
     overflow: hidden;
 }
 
+#report-container .report-show {
+    transform: rotate(270deg);
+}
+
 #report-container .report-hide {
-    transform: rotate(180deg);
+    transform: rotate(90deg);
 }
 
 #report-container .collapsible.narrow-down {
