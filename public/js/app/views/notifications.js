@@ -34,10 +34,12 @@ define([
                     case 'reconnect':
                         options.message = 'Connection reloaded';
                         options.cls = 'belize-hole';
+                        break;
 
                     case 'error':
                         options.message = data.connection[2];
                         options.cls = 'pomegranate';
+                        break;
                 }
             }
 

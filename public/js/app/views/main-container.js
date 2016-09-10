@@ -68,6 +68,9 @@ define([
         showSuiteSettings: function(event) {
             event.preventDefault();
             this.options.app.trigger('app:updateSuites', []);
+            this.options.app.trigger('app:Notify', {
+                connection:[null, 'error', 'Setting is not available']
+            });
         }
 
     });
