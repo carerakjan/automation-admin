@@ -46,15 +46,28 @@ define([
             }).on('drop', function (el, container) {
 
                 if(container && container.id === 'right-scripts') {
-                    $(el).find('[class^=fui]')
+                    $(el).find('.fui-arrow-right')
                         .removeClass('fui-arrow-right')
-                        .addClass('fui-cross')
-                        .on('click', function() {
-                            $(this).closest('div.palette').remove();
-                        });
+                        .addClass('fui-trash')
+                        .on('click', this.removeSuite.bind(this));
+
+                    $(el).find('.fui-gear')
+                        .removeClass('hide')
+                        .on('click', this.showSuiteSettings.bind(this))
                 }
 
-            });
+            }.bind(this));
+        },
+
+        removeSuite: function(event) {
+            event.preventDefault();
+            $(event.target).closest('div.palette').remove();
+            this.options.app.trigger('app:updateSuites', []);
+        },
+
+        showSuiteSettings: function(event) {
+            event.preventDefault();
+            this.options.app.trigger('app:updateSuites', []);
         }
 
     });
