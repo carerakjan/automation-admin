@@ -13,7 +13,7 @@ define([
 
         initialize: function(){
             BaseView.prototype.initialize.apply(this, arguments);
-            this.listenTo(this.options.app, 'app:Notify', this.showNotification.bind(this));
+            this.listenTo(this.options.app, 'app:notify', this.showNotification.bind(this));
             socket.on('notification', this.render.bind(this));
         },
 
