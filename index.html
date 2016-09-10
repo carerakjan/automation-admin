@@ -24,50 +24,7 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Admin panel</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-          <form class="navbar-form navbar-left" id="form-runBs">
-
-            <div class="input-group">
-              <span class="input-group-btn">
-                  <button class="btn btn-default" type="button">Run</button>
-              </span>
-              <input id="urlInput" name="urlInput" type="text" class="form-control" placeholder="Portal URL" style="width: 50vw">
-            </div>
-            <div class="input-group">
-              <select id="platform" name="platform" class="form-control">
-                <option value="all" selected="selected">all</option>
-                <option value="mobile">mobile</option>
-                <option value="tablet">tablet</option>
-                <option value="desktop">desktop</option>
-              </select>
-            </div>
-
-            <div style="padding:0 .5em; display:inline; height: 0"></div>
-
-              <label class="checkbox" for="useAutomation">
-                <input type="checkbox" checked value="" id="useAutomation" name="useAutomation" data-toggle="checkbox" class="custom-checkbox"><span class="icons"><span class="icon-unchecked"></span><span class="icon-checked"></span></span>
-                Use auto script
-              </label>
-
-          </form>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
+    <nav id ="navbar-container" class="navbar navbar-default"></nav>
     <div id="main-container" class="container"></div>
     <div id="report-container" class="container"></div>
     <script>
