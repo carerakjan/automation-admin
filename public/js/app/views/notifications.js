@@ -13,19 +13,31 @@ define([
 
         initialize: function(){
             BaseView.prototype.initialize.apply(this, arguments);
+            this.listenTo(this.options.app, 'app:Notify', this.showNotification.bind(this));
             socket.on('notification', this.render.bind(this));
+        },
+
+        showNotification: function(data) {
+            this.render(data);
         },
 
         handleReceivedNotification: function(data) {
             var options = {};
 
             if(data.connection) {
-                if(data.connection[1] === 'connect') {
-                    options.message = 'New connection';
-                    options.cls = 'pumpkin';
-                } else if(data.connection[1] === 'reconnect') {
-                    options.message = 'Connection reloaded';
-                    options.cls = 'belize-hole';
+                switch (data.connection[1]) {
+                    case 'connect':
+                        options.message = 'New connection';
+                        options.cls = 'pumpkin';
+                        break;
+
+                    case 'reconnect':
+                        options.message = 'Connection reloaded';
+                        options.cls = 'belize-hole';
+
+                    case 'error':
+                        options.message = data.connection[2];
+                        options.cls = 'pomegranate';
                 }
             }
 
