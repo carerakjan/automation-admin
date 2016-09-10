@@ -11,6 +11,10 @@ define([
 
         _templateString: notificationsTemplate,
 
+        events: {
+            'click .palette': 'removeNotification'
+        },
+
         initialize: function(){
             BaseView.prototype.initialize.apply(this, arguments);
             this.listenTo(this.options.app, 'app:notify', this.showNotification.bind(this));
@@ -54,15 +58,29 @@ define([
 
         hangAnimation: function(element) {
 
-            setTimeout(function(){
-                element.css({opacity:0});
-            }, 2000);
+            !element[0].timeouts && (element[0].timeouts = []);
 
-            setTimeout(function(){
+            element[0].timeouts.push(setTimeout(function(){
+                element.css({opacity:0});
+            }, 2000));
+
+            element[0].timeouts.push(setTimeout(function(){
                 element.remove();
-            }, 2500);
+            }, 2500));
 
             return element;
+        },
+
+        removeAnimation: function(element) {
+            _.each(element.timeouts, function(timeoutId){
+                clearTimeout(timeoutId);
+            });
+            return element;
+        },
+
+        removeNotification: function(event) {
+            event.preventDefault();
+            $(this.removeAnimation(event.target)).remove();
         }
 
     });
