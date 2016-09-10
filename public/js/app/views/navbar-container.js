@@ -51,14 +51,14 @@ define([
             } catch (e) {
                 return this.options.app.trigger('app:notify', {
                     connection: [null, 'error', e.message]
-                });
+                }) && false;
             }
         },
 
         submitForm: function(event) {
             event.preventDefault();
-            this.options.app.trigger('app:eraseReports');
             if(this.isValidUrl(this.$('#urlInput').val())) {
+                this.options.app.trigger('app:eraseReports');
                 this.model.set('url', this.$('#urlInput').val());
                 socket.emit('run_bs', this.model.toJSON());
             }
