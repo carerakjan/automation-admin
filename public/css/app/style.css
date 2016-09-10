@@ -133,10 +133,21 @@
 }
 
 /*--- navbar ---*/
-#formRunBs {
-    /*width: 50vw*/
+#formRunBs .input-group {
+    padding: 0 1em;
+    width: auto;
 }
 
-.horizontal-padding-05 {
-    padding:0 .5em; display:inline; height: 0
+#urlInput {
+    width: 40vw;
+}
+
+@media (max-width: 768px) {
+    #urlInput {
+        width: 70vw;
+    }
+
+    #formRunBs .input-group {
+        padding: .5em 1em;
+    }
 }

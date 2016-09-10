@@ -27,24 +27,21 @@
                         placeholder="Portal URL">
             </div>
 
-            <div class="horizontal-padding-05"></div>
-
-            <div class="input-group">
+            <div id="platform" class="input-group">
 
                 <div class="btn-group">
                     <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">
-                        Platform <span class="caret"></span>
+                        <span class="value">Platform</span> <span class="caret"></span>
                     </button>
                     <ul role="menu" class="dropdown-menu">
-                        <li><a href="#">all</a></li>
-                        <li><a href="#">mobile</a></li>
-                        <li><a href="#">tablet</a></li>
-                        <li><a href="#">desktop</a></li>
+                        <% _.each(platforms, function(platform) { %>
+                            <li <%= (platform === 'all') ? 'class="active"' : '' %> >
+                                <a href="javascript:void(0);"><%= platform %></a>
+                            </li>
+                        <% }) %>
                     </ul>
                 </div>
             </div>
-
-            <div class="horizontal-padding-05"></div>
 
             <div class="input-group">
                 <label class="checkbox" for="useAutomation">
