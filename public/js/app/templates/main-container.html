@@ -21,7 +21,9 @@
                 ? suite.get('metaData').title : suite.get('id') %>
             </span>
             <span class="fui-arrow-right pull-right"></span>
+            <% if(suite.get('metaData') && suite.get('metaData').customFields) { %>
             <span class="fui-gear pull-right hide transition padding-hor-10"></span>
+            <% } %>
         </div>
 
         <% }); %>
