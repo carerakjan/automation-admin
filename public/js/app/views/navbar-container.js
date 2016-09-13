@@ -69,7 +69,7 @@ define([
             this.resetDropDown();
             this.$(event.target).closest('li').addClass('active');
             this.model.set('activePlatform', $(event.target).html());
-            this.$('[data-toggle="dropdown"] .value').html(this.model.get('activePlatform'));
+            this.$('[data-toggle="dropdown"] .value').find('b').html(this.model.get('activePlatform'));
         },
 
         resetDropDown: function() {
