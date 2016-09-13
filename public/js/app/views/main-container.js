@@ -4,8 +4,9 @@ define([
     'common/base.view',
     'dragula',
     'collections/suites',
+    'views/suite-settings',
     'text!templates/main-container.html'
-], function($, _, BaseView, dragula, SuitesCollection, mainContainerTemplate){
+], function($, _, BaseView, dragula, SuitesCollection, SuiteSettingsView, mainContainerTemplate){
     return BaseView.extend({
 
         el: $("#main-container"),
@@ -61,13 +62,29 @@ define([
 
         removeSuite: function(event) {
             event.preventDefault();
-            $(event.target).closest('div.palette').remove();
+            $(event.target).closest('.palette-item').remove();
             this.options.app.trigger('app:updateSuites', []);
+        },
+
+        findModel: function(id) {
+            return function(model) {
+              return model.get('id') === id;
+            };
         },
 
         showSuiteSettings: function(event) {
             event.preventDefault();
-            this.options.app.trigger('app:updateSuites', []);
+
+            //var suiteId = event.target.dataset['suiteId'];
+            //var model = this.collection.find(this.findModel(suiteId));
+
+            //new SuiteSettingsView({
+            //    app: this.options.app
+            //}).render({
+            //    model: model,
+            //    container: $(event.target).closest('.palette-item')
+            //});
+
             this.options.app.trigger('app:notify', {
                 connection:[null, 'error', 'Setting is not available']
             });

@@ -12,9 +12,13 @@ app.use('/admin/public', express.static(require('path').join(__dirname, 'public'
 
 function listOfTestSuites(name, client) {
     client([
-        {id:"test1", metaData: {}},
-        {id:"test2", metaData: {}},
-        {id:"test3", metaData: {}}
+        {id:"test1", metaData: {title:"super mega title"}},
+        {id:"test2", metaData: {customFields:[
+            {id:'login', name:'login', type:'text'}
+        ]}},
+        {id:"test3", metaData: {customFields:[
+            {id:'login', name:'login', type:'text'}
+        ]}}
     ]);
 }
 
