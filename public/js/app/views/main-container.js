@@ -46,7 +46,7 @@ define([
 
             }).on('drop', function (el, container) {
 
-                if(container && container.id === 'right-scripts') {
+                if(container && container.id === 'right-scripts' && arguments[1] !== arguments[2]) {
                     $(el).find('.fui-arrow-right')
                         .removeClass('fui-arrow-right')
                         .addClass('fui-trash')
