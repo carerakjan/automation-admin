@@ -1,5 +1,5 @@
 define([
-    'backbone'
-], function(Backbone){
-    return Backbone.Model.extend({});
+    'common/base.model'
+], function(BaseModel){
+    return BaseModel.extend({});
 });
