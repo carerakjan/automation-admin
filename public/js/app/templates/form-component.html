@@ -80,22 +80,24 @@
     <% } %>
 
     <% if(field.component === 'switch') { %>
-        <input
-                type="checkbox"
-                data-toggle="switch"
-                id="<%= field.name %>"
-                name="<%= field.name %>"
-                class="fui-switch"
-                data-on-color="primary"
-                <% if(field.checked && field.checked === 'true') { %> checked <% } %>
-                <% if(field.actionText) { %>
-                    data-on-text="<%= field.actionText.on %>"
-                    data-off-text="<%= field.actionText.off %>"
-                <% } else { %>
-                    data-on-text="<i class='fui-check'></i>"
-                    data-off-text="<i class='fui-cross'></i>"
-                <% } %>
-        >
+        <div>
+            <input
+                    type="checkbox"
+                    data-toggle="switch"
+                    id="<%= field.name %>"
+                    name="<%= field.name %>"
+                    class="fui-switch"
+                    data-on-color="primary"
+                    <% if(field.checked && field.checked === 'true') { %> checked <% } %>
+                    <% if(field.actionText) { %>
+                        data-on-text="<%= field.actionText.on %>"
+                        data-off-text="<%= field.actionText.off %>"
+                    <% } else { %>
+                        data-on-text="<i class='fui-check'></i>"
+                        data-off-text="<i class='fui-cross'></i>"
+                    <% } %>
+            >
+        </div>
     <% } %>
 
     <% if(field.description) { %>
