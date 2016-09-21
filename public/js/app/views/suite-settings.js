@@ -21,6 +21,21 @@ define([
             }));
             options.container.append(this.$el);
             this.delegateEvents();
+            this.initForm();
+        },
+
+        initForm: function() {
+
+            // Custom Selects
+            this.$('.fui-select').select2();
+
+            // Checkboxes and Radio buttons
+            this.$('.fui-checkbox').radiocheck();
+            this.$('.fui-radio').radiocheck();
+
+            // Switches
+            this.$('.fui-switch').bootstrapSwitch();
+
         },
 
         validateForm: function() {},

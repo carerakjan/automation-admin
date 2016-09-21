@@ -27,14 +27,14 @@
       "component": "checkbox",
       "name": "isAdmin",
       "label": "Is admin?",
-      "checked": "true"
+      "checked": "false"
     },
 
     {
       "component": "radio",
       "name": "isPlayFootball",
       "label": "Do you play in a football?",
-      "checked": "true",
+      "checked": "false",
       "description": "This is small text under the field"
     },
 

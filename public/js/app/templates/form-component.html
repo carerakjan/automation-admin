@@ -5,99 +5,97 @@
         <label><%= field.label %></label>
     <% } %>
 
-    <% switch (field.component) {%>
+    <% if(field.component === 'input') { %>
+        <input
+                class="fui-input form-control"
+                type="<%= field.type %>"
+                id="<%= field.name %>"
+                name="<%= field.name %>"
+                value="<%= field.default ? field.default : '' %>"
+                placeholder="<%= field.label ? field.label : '' %>"
+        >
+    <% } %>
 
-        <% case 'input': %>
-            <input
-                    class="fui-input form-control"
-                    type="<%= field.type %>"
-                    id="<%= field.name %>"
-                    name="<%= field.name %>"
-                    value="<%= field.default ? field.default : '' %>"
-                    placeholder="<%= field.label ? field.label : '' %>"
-            >
-        <% break; %>
-
-        <% case 'checkbox': %>
-            <label class="checkbox" for="<%= field.name %>">
-                <input
-                        type="checkbox"
-                        data-toggle="checkbox"
-                        id="<%= field.name %>"
-                        name="<%= field.name %>"
-                        class="fui-input custom-checkbox"
-                        <% if(field.checked && field.checked === 'true') { %> checked <% } %>
-                >
-                <span class="icons">
-                    <span class="icon-unchecked"></span>
-                    <span class="icon-checked"></span>
-                </span>
-                <%= field.label %>
-            </label>
-        <% break; %>
-
-        <% case 'radio': %>
-            <label class="radio" for="<%= field.name %>">
-                <input
-                        type="radio"
-                        data-toggle="radio"
-                        id="<%= field.name %>"
-                        name="<%= field.name %>"
-                        class="fui-radio custom-radio"
-                        <% if(field.checked && field.checked === 'true') { %> checked <% } %>
-                >
-                <span class="icons">
-                    <span class="icon-unchecked"></span>
-                    <span class="icon-checked"></span>
-                </span>
-                <%= field.label %>
-            </label>
-        <% break; %>
-
-        <% case 'select': %>
-            <select
-                    id="<%= field.name %>"
-                    name="<%= field.name %>"
-                    class="fui-select form-control select select-primary select-block mbl"
-            >
-                <% _.each(field.groups, function(group) { %>
-                    <optgroup label="<%= group.label %>">
-                        <% _.each(group.options, function(option) { %>
-                            <option value="<%= option.text.split(' ').join('_') %>"
-                                <% if (option.selected && option.selected === 'true') { %> selected <% } %>>
-                                <%= options.text %>
-                            </option>
-                        <% } %>
-                    </optgroup>
-                <% }); %>
-
-                <% _.each(field.options, function(option) { %>
-                    <option value="<%= option.text.split(' ').join('_') %>"
-                    <% if (option.selected && option.selected === 'true') { %> selected <% } %>>
-                    <%= options.text %>
-                    </option>
-                <% }); %>
-
-            </select>
-        <% break; %>
-
-        <% case 'switch': %>
+    <% if(field.component === 'checkbox') { %>
+        <label class="checkbox primary" for="<%= field.name %>">
             <input
                     type="checkbox"
-                    data-toggle="switch"
+                    data-toggle="checkbox"
                     id="<%= field.name %>"
                     name="<%= field.name %>"
-                    class="fui-switch"
+                    class="fui-input custom-checkbox"
                     <% if(field.checked && field.checked === 'true') { %> checked <% } %>
-                    <% if(field.actionText) { %>
-                        data-on-text="<%= field.actionText.on %>"
-                        data-off-text="<%= field.actionText.off %>"
-                    <% } else { %>
-                        data-on-text="<i class='fui-check'></i>"
-                        data-off-text="<i class='fui-cross'></i>"
-                    <% } %>
             >
-        <% break; %>
+            <span class="icons">
+                <span class="icon-unchecked"></span>
+                <span class="icon-checked"></span>
+            </span>
+            <%= field.label %>
+        </label>
+    <% } %>
+
+    <% if(field.component === 'radio') { %>
+        <label class="radio primary" for="<%= field.name %>">
+            <input
+                    type="radio"
+                    data-toggle="radio"
+                    id="<%= field.name %>"
+                    name="<%= field.name %>"
+                    class="fui-radio custom-radio"
+                    <% if(field.checked && field.checked === 'true') { %> checked <% } %>
+            >
+            <span class="icons">
+                <span class="icon-unchecked"></span>
+                <span class="icon-checked"></span>
+            </span>
+            <%= field.label %>
+        </label>
+    <% } %>
+
+    <% if(field.component === 'select') { %>
+        <select
+                id="<%= field.name %>"
+                name="<%= field.name %>"
+                class="fui-select form-control select select-inverse select-block mbl"
+        >
+            <% _.each(field.groups, function(group) { %>
+                <optgroup label="<%= group.label %>">
+                    <% _.each(group.options, function(option) { %>
+                        <option value="<%= option.text.split(' ').join('_') %>"
+                            <% if (option.selected && option.selected === 'true') { %> selected <% } %>>
+                            <%= option.text %>
+                        </option>
+                    <% }); %>
+                </optgroup>
+            <% }); %>
+
+            <% _.each(field.options, function(option) { %>
+                <option value="<%= option.text.split(' ').join('_') %>"
+                <% if (option.selected && option.selected === 'true') { %> selected <% } %>>
+                <%= option.text %>
+                </option>
+            <% }); %>
+
+        </select>
+    <% } %>
+
+    <% if(field.component === 'switch') { %>
+        <input
+                type="checkbox"
+                data-toggle="switch"
+                id="<%= field.name %>"
+                name="<%= field.name %>"
+                class="fui-switch"
+                data-on-color="primary"
+                <% if(field.checked && field.checked === 'true') { %> checked <% } %>
+                <% if(field.actionText) { %>
+                    data-on-text="<%= field.actionText.on %>"
+                    data-off-text="<%= field.actionText.off %>"
+                <% } else { %>
+                    data-on-text="<i class='fui-check'></i>"
+                    data-off-text="<i class='fui-cross'></i>"
+                <% } %>
+        >
     <% } %>
 
     <% if(field.description) { %>
