@@ -15,7 +15,10 @@ define([
 
         render: function(options) {
             this.model = options.model;
-            this.$el = $(this.template(this.model));
+            this.$el = $(this.template({
+                templateFn: options.templateFn,
+                data: this.model.toJSON()
+            }));
             options.container.append(this.$el);
             this.delegateEvents();
         },

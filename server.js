@@ -10,15 +10,13 @@ app.get('/', function (req, res) {
 
 app.use('/admin/public', express.static(require('path').join(__dirname, 'public')));
 
+var metaData = require('./meta-data');
+
 function listOfTestSuites(name, client) {
     client([
         {id:"test1", metaData: {title:"super mega title"}},
-        {id:"test2", metaData: {customFields:[
-            {id:'login', name:'login', type:'text'}
-        ]}},
-        {id:"test3", metaData: {customFields:[
-            {id:'login', name:'login', type:'text'}
-        ]}}
+        {id:"test2", metaData: metaData },
+        {id:"test3"}
     ]);
 }
 

@@ -1,10 +1,13 @@
 <div class="palette palette-concrete">
-    <!--form fields-->
-    <div>
+    <form>
+        <div><!--form fields-->
+            <% data.metaData && _.each(data.metaData.customFields, function(field) { %>
+                <%= templateFn({field: field}) %>
+            <% }) %>
+        </div>
 
-    </div>
-    <!--form actions-->
-    <div>
-        <button class="btn btn-block btn-lg btn-inverse">Save</button>
-    </div>
+        <div><!--form actions-->
+            <button class="btn btn-block btn-lg btn-inverse">Save</button>
+        </div>
+    </form>
 </div>

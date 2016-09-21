@@ -1,0 +1,91 @@
+{
+  "title": "I'm a title",
+  "customFields": [
+    {
+      "component": "input",
+      "type": "text",
+      "name": "login",
+      "label": "Login field",
+      "default": "Username",
+      "validation": {
+        "regexp": "[a-zA-Z0-9]{5,25}"
+      }
+    },
+
+    {
+      "component": "input",
+      "type":"tel",
+      "name": "Phone",
+      "label": "Phone Number",
+      "default": "+38",
+      "validation": {
+        "regexp": "+38[0-9]{10}"
+      }
+    },
+
+    {
+      "component": "checkbox",
+      "name": "isAdmin",
+      "label": "Is admin?",
+      "checked": "true"
+    },
+
+    {
+      "component": "radio",
+      "name": "isPlayFootball",
+      "label": "Do you play in a football?",
+      "checked": "true",
+      "description": "This is small text under the field"
+    },
+
+    {
+      "component": "radio:group",
+      "name": "movie",
+      "label": "What movies do you like?",
+      "group": [
+        { "text": "Comedy", "default": "true"  },
+        { "text": "science fiction"  }
+      ]
+    },
+
+    {
+      "component": "select",
+      "name": "platform",
+      "label": "Please select a platform",
+      "options": [
+        {"text": "mobile"},
+        {"text": "tablet", "selected": "true"}
+      ]
+    },
+
+    {
+      "component": "select",
+      "name": "devices",
+      "label": "Please select a device",
+      "groups": [
+        {"label": "mobile", "options": [
+          {"text":"iphone 6", "selected":"true"},
+          {"text":"asus zenfone 5"}
+        ]}
+      ]
+    },
+
+    {
+      "component": "switch",
+      "name": "agree",
+      "label": "Do you agree with requirements?",
+      "checked": "false",
+      "actionText": {
+        "on": "Yes",
+        "off": "No"
+      }
+    },
+
+    {
+      "component": "switch",
+      "name": "agree",
+      "label": "Do you agree with requirements?",
+      "checked": "true"
+    }
+  ]
+}
