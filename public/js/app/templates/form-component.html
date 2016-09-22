@@ -23,13 +23,9 @@
                     data-toggle="checkbox"
                     id="<%= field.name %>"
                     name="<%= field.name %>"
-                    class="fui-input custom-checkbox"
+                    class="fui-checkbox custom-checkbox"
                     <% if(field.checked && field.checked === 'true') { %> checked <% } %>
             >
-            <span class="icons">
-                <span class="icon-unchecked"></span>
-                <span class="icon-checked"></span>
-            </span>
             <%= field.label %>
         </label>
     <% } %>
@@ -44,10 +40,6 @@
                     class="fui-radio custom-radio"
                     <% if(field.checked && field.checked === 'true') { %> checked <% } %>
             >
-            <span class="icons">
-                <span class="icon-unchecked"></span>
-                <span class="icon-checked"></span>
-            </span>
             <%= field.label %>
         </label>
     <% } %>
