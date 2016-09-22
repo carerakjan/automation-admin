@@ -9,7 +9,6 @@
         <input
                 class="fui-input form-control"
                 type="<%= field.type %>"
-                id="<%= field.name %>"
                 name="<%= field.name %>"
                 value="<%= field.default ? field.default : '' %>"
                 placeholder="<%= field.label ? field.label : '' %>"
@@ -17,11 +16,10 @@
     <% } %>
 
     <% if(field.component === 'checkbox') { %>
-        <label class="checkbox primary" for="<%= field.name %>">
+        <label class="checkbox primary">
             <input
                     type="checkbox"
                     data-toggle="checkbox"
-                    id="<%= field.name %>"
                     name="<%= field.name %>"
                     class="fui-checkbox custom-checkbox"
                     <% if(field.checked && field.checked === 'true') { %> checked <% } %>
@@ -31,22 +29,40 @@
     <% } %>
 
     <% if(field.component === 'radio') { %>
-        <label class="radio primary" for="<%= field.name %>">
-            <input
-                    type="radio"
-                    data-toggle="radio"
-                    id="<%= field.name %>"
-                    name="<%= field.name %>"
-                    class="fui-radio custom-radio"
-                    <% if(field.checked && field.checked === 'true') { %> checked <% } %>
-            >
-            <%= field.label %>
-        </label>
+
+        <% if(field.group) { %>
+
+            <label><%= field.label %></label>
+
+            <% _.each(field.group, function(radio) { %>
+                <label class="radio primary">
+                    <input
+                            type="radio"
+                            data-toggle="radio"
+                            name="<%= field.name %>"
+                            class="fui-radio custom-radio"
+                    <% if(radio.checked && radio.checked === 'true') { %> checked <% } %>
+                    >
+                    <%= radio.label %>
+                </label>
+            <% }); %>
+
+        <% } else { %>
+            <label class="radio primary">
+                <input
+                        type="radio"
+                        data-toggle="radio"
+                        name="<%= field.name %>"
+                        class="fui-radio custom-radio"
+                        <% if(field.checked && field.checked === 'true') { %> checked <% } %>
+                >
+                <%= field.label %>
+            </label>
+        <% } %>
     <% } %>
 
     <% if(field.component === 'select') { %>
         <select
-                id="<%= field.name %>"
                 name="<%= field.name %>"
                 class="fui-select form-control select select-inverse select-block mbl"
         >
@@ -76,7 +92,6 @@
             <input
                     type="checkbox"
                     data-toggle="switch"
-                    id="<%= field.name %>"
                     name="<%= field.name %>"
                     class="fui-switch"
                     data-on-color="primary"

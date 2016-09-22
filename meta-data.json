@@ -34,18 +34,19 @@
       "component": "radio",
       "name": "isPlayFootball",
       "label": "Do you play in a football?",
-      "checked": "false",
+      "checked": "true",
       "description": "This is small text under the field"
     },
 
     {
-      "component": "radio:group",
+      "component": "radio",
       "name": "movie",
       "label": "What movies do you like?",
       "group": [
-        { "text": "Comedy", "default": "true"  },
-        { "text": "science fiction"  }
-      ]
+        { "label": "Comedy", "checked": "true"  },
+        { "label": "Science fiction"  }
+      ],
+      "description": "This is small text under the field"
     },
 
     {
