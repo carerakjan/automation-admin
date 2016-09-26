@@ -2,11 +2,12 @@ define([
     'jquery',
     'backbone',
     'underscore',
+    'common/base.collection',
     'views/navbar-container',
     'views/main-container',
     'views/report-container',
     'views/notifications'
-], function($, Backbone, _, NavBarView, MainView, ReportView, NotificationsView){
+], function($, Backbone, _, BaseCollection, NavBarView, MainView, ReportView, NotificationsView){
 
     var loadFlatUI = function (callback) {
         var script = document.createElement('script');
@@ -16,7 +17,7 @@ define([
     };
 
     return _.extend({
-        views: [],
+        views: new BaseCollection(),
         initialize: function() {
             window.jQuery = $;
 
@@ -24,13 +25,12 @@ define([
                 delete window.jQuery;
             });
 
-            this.views.push(new NavBarView(this.getViewParams('navbar-container')));
-            this.views.push(new MainView(this.getViewParams('main-container')));
-            this.views.push(new ReportView(this.getViewParams('report-container')));
-            this.views.push(new NotificationsView(this.getViewParams('notifications')));
-        },
-        getViewParams: function(id) {
-            return { name: id, app: this };
+            this.views.add([
+                { id: 'navbar', view: new NavBarView({app: this}) },
+                { id: 'main', view: new MainView({app: this}) },
+                { id: 'report', view: new ReportView({app: this}) },
+                { id: 'notifications', view: new NotificationsView({app: this}) }
+            ]);
         }
     }, Backbone.Events);
 

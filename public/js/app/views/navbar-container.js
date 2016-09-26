@@ -1,21 +1,21 @@
 define([
     'jquery',
     'underscore',
-    'backbone',
+    'common/base.model',
+    'common/base.collection',
     'socket',
     'common/base.view',
     'text!templates/navbar-container.html'
-], function($, _, Backbone, socket, BaseView, navBarContainerTemplate){
+], function($, _, BaseModel, BaseCollection, socket, BaseView, navBarContainerTemplate){
     return BaseView.extend({
 
         el: $("#navbar-container"),
 
-        model: new (Backbone.Model.extend({
-            defaults: {
-                useAutomation: true,
-                activePlatform: 'all'
-            }
-        }))(),
+        model: new BaseModel({
+            useAutomation: true,
+            activePlatform: 'all',
+            suites: new BaseCollection()
+        }),
 
         events: {
             'submit #formRunBs' : 'submitForm',
@@ -28,12 +28,7 @@ define([
 
         initialize: function(){
             BaseView.prototype.initialize.apply(this, arguments);
-            this.listenTo(this.options.app, 'app:updateSuites', this.updateSuites.bind(this));
             this.render();
-        },
-
-        updateSuites: function(suites) {
-            this.model.set('suites', suites);
         },
 
         render: function() {
@@ -60,8 +55,42 @@ define([
             if(this.isValidUrl(this.$('#urlInput').val())) {
                 this.options.app.trigger('app:eraseReports');
                 this.model.set('url', this.$('#urlInput').val());
-                socket.emit('run_bs', this.model.toJSON());
+                socket.emit('run_bs', this.prepareData(this.model.toJSON()));
             }
+        },
+
+        prepareData: function(model) {
+            var result = {};
+            var _model = this.deepCopy(model);
+            result.platform = model.activePlatform;
+            _model.useAutomation && _model.suites.length &&
+            (result.suites = this.parseMetaData(this.removeIDs(_model.suites)));
+            return result;
+        },
+
+        deepCopy: function(obj) {
+            return JSON.parse(JSON.stringify(obj));
+        },
+
+        removeIDs: function(collection) {
+            return collection.map(function(model) {
+                model._id && delete model._id;
+                return model;
+            });
+        },
+
+        parseMetaData: function(collection) {
+            return collection.map(function(model) {
+                if(!model['customFields']) return model;
+                var customFields = model['customFields'];
+                delete model['customFields'];
+
+                return customFields.reduce(function(metaData, field){
+                    var value = field.value || field.default;
+                    value && (metaData[field.name] = value);
+                    return metaData;
+                }, model.metaData = {}) && model;
+            });
         },
 
         changePlatform: function(event) {

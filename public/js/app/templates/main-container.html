@@ -15,7 +15,7 @@
 
         <% _.each(data, function(suite){ %>
 
-        <div class="palette-item">
+        <div class="palette-item" data-suite-id="<%= suite.get('id') %>">
             <div class="palette palette-asbestos">
                 <span class="item padding-hor-10">
                 <%= suite.get('metaData') && suite.get('metaData').title
@@ -23,7 +23,7 @@
                 </span>
                 <span class="fui-arrow-right pull-right"></span>
                 <% if(suite.get('metaData') && suite.get('metaData').customFields) { %>
-                <span data-suite-id="<%= suite.get('id') %>" class="fui-gear pull-right hide transition padding-hor-10"></span>
+                <span class="fui-gear pull-right hide transition padding-hor-10"></span>
                 <% } %>
             </div>
         </div>

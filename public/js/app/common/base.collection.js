@@ -1,8 +1,11 @@
 define([
-    'backbone'
-], function(Backbone){
+    'backbone',
+    'common/base.model'
+], function(Backbone, BaseModel){
 
     return Backbone.Collection.extend({
+
+        model: BaseModel,
 
         fetchError: function(data) {
             this.trigger('fetch:error', data.error);
