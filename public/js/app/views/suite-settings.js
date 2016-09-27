@@ -41,22 +41,26 @@ define([
         },
 
         validateForm: function(form) {
-            this.form.forEach(this.unMarkError());
+            this.form.forEach(this.unMarkError.bind(this));
             return form.reduce(function(isValid, field) {
 
                 var ff = _.find(this.form, {name:field.name});
                 var validation = ff['validation'];
 
-                if(!validation) {
-                    field.validate = true;
-                    return isValid && field.validate;
-                } else if(validation.regexp) {
+                if(validation && validation.regexp) {
                     field.validate = new RegExp(validation.regexp).test(field.value);
-                    return isValid && field.validate;
+                    isValid = isValid && field.validate;
+                } else {
+                    field.validate = true;
+                    isValid = isValid && field.validate;
                 }
 
-                field.validate = true;
-                return isValid && field.validate;
+                if(field.hasOwnProperty('validate') && !field.validate) {
+                    delete field.validate;
+                    this.markError(field);
+                }
+
+                return isValid;
 
             }.bind(this), true);
         },
@@ -64,30 +68,25 @@ define([
         submitForm: function(event) {
             event.preventDefault();
             var form = $(event.target).serializeArray();
-            this.validateForm(form) &&
-            (this.updateModel(form) || this.hideForm()) || this.showError(form);
+            this.validateForm(form) && (this.updateModel(form) || this.hideForm());
         },
 
         updateModel: function(form) {
-            this.form.forEach(this.unMarkError());
             this.form.forEach(this.mergeData(form));
         },
 
-        markError: function() {
-            return function(field) {
-                if(!field.validate) {
-                    var errorMessage = field.name + ' validation error';
-                    this.options.app.trigger('app:notify', { connection: [null, 'error', errorMessage] });
-                    this.$('[name="' + field.name + '"]').closest('.form-group').addClass('has-error');
-                }
-            }.bind(this);
+        getField: function(field) {
+            return this.$('[name="' + field.name + '"]');
         },
 
-        unMarkError: function() {
-            return function (field) {
-                this.$('[name="' + field.name + '"]')
-                    .closest('.form-group').removeClass('has-error');
-            }.bind(this);
+        markError: function(field) {
+            var errorMessage = field.name + ' validation error';
+            this.options.app.trigger('app:notify', { connection: [null, 'error', errorMessage] });
+            this.getField(field).closest('.form-group').addClass('has-error');
+        },
+
+        unMarkError: function (field) {
+            this.getField(field).closest('.form-group').removeClass('has-error');
         },
 
         groupByName: function(form) {
@@ -109,10 +108,6 @@ define([
                 }
                 field.value = ff.value;
             }.bind(this);
-        },
-
-        showError: function(form) {
-            form.forEach(this.markError());
         },
 
         hideForm: function() {
