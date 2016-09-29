@@ -159,48 +159,60 @@ define([ 'underscore' ], function(_) {
 
     var Component = function(data) {
 
-        var type = data['component'];
+        this.type = data['component'];
 
-        if(this.isInput(type)) {
+        if(this.isInput) {
             return new Input(data);
         }
 
-        if(this.isRadio(type)) {
+        if(this.isRadio) {
             return new Radio(data);
         }
 
-        if(this.isCheckbox(type)) {
+        if(this.isCheckbox) {
             return new Checkbox(data);
         }
 
-        if(this.isSwitch(type)) {
+        if(this.isSwitch) {
             return new Switch(data);
         }
 
-        if(this.isSelect(type)) {
+        if(this.isSelect) {
             return new Select(data);
         }
     };
 
-    Component.prototype.isInput = function(type) {
-        return type === 'input';
-    };
+    Object.defineProperties(Component.prototype, {
+        'isInput': {
+            get: function() {
+                return this.type === 'input';
+            }
+        },
 
-    Component.prototype.isRadio = function(type) {
-        return type === 'radio';
-    };
+        'isRadio': {
+            get: function() {
+                return this.type === 'radio';
+            }
+        },
 
-    Component.prototype.isCheckbox = function(type) {
-        return type === 'checkbox';
-    };
+        'isCheckbox': {
+            get: function() {
+                return this.type === 'checkbox';
+            }
+        },
 
-    Component.prototype.isSelect = function(type) {
-        return type === 'select';
-    };
+        'isSelect': {
+            get: function() {
+                return this.type === 'select';
+            }
+        },
 
-    Component.prototype.isSwitch = function(type) {
-        return type === 'switch';
-    };
+        'isSwitch': {
+            get: function() {
+                return this.type === 'switch';
+            }
+        }
+    });
 
     return Component;
 
