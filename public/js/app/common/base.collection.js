@@ -13,7 +13,6 @@ define([
 
         fetchSuccess: function(data, options) {
             this.add(data, options);
-            console.log(this.toJSON());
             this.trigger('fetch:success');
         },
 
