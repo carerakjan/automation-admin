@@ -161,30 +161,25 @@ define([ 'underscore' ], function(_) {
 
         var type = data['component'];
 
-        var component = null;
-
         if(this.isInput(type)) {
-            component = new Input(data);
+            return new Input(data);
         }
 
         if(this.isRadio(type)) {
-            component = new Radio(data);
+            return new Radio(data);
         }
 
         if(this.isCheckbox(type)) {
-            component = new Checkbox(data);
+            return new Checkbox(data);
         }
 
         if(this.isSwitch(type)) {
-            component = new Switch(data);
+            return new Switch(data);
         }
 
         if(this.isSelect(type)) {
-            component = new Select(data);
+            return new Select(data);
         }
-
-        return component;
-
     };
 
     Component.prototype.isInput = function(type) {
