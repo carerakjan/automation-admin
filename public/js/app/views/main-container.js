@@ -102,67 +102,6 @@ define([
             return obj;
         },
 
-        convertModel: function(model) {
-            var result = {};
-            result.name = model.id;
-            model.metaData && model.metaData.customFields &&
-            (result.customFields = model.metaData.customFields.map(this.setDefault));
-            return result;
-        },
-
-        setDefault: function(field) {
-            switch (field['component']) {
-                case 'input':
-                    field.default && (field.value = field.default);
-                    break;
-
-                case 'switch':
-                    field.value = field.checked ? 'on' : 'off';
-                    break;
-
-                case 'select':
-                    var selectedOption = field.options && field.options.filter(function(option) {
-                        return option.selected;
-                    }) || [];
-                    if(selectedOption.length) {
-                        field.value = selectedOption[0].text;
-                    } else {
-                        field.groups && field.groups.filter(function(group) {
-                            selectedOption = group.options && group.options.filter(function(option) {
-                                return option.selected;
-                            }) || [];
-                        });
-
-                        if(selectedOption.length) {
-                            field.value = selectedOption[0].text;
-                        }
-                    }
-                    break;
-                case 'checkbox': case 'radio':
-                    if(!field.group) {
-                        field.value = field.checked ? 'on' : 'off'
-                    } else {
-                        if(field['component'] === 'radio') {
-                            field.group.forEach(function(radio) {
-                                if(radio.checked) field.value = radio.label;
-                            });
-                        } else {
-                            field.group.forEach(function(checkbox) {
-                                if(checkbox.checked) {
-                                    !field.value && (field.value = []);
-                                    field.value.push(checkbox.label);
-                                }
-                            });
-                            if(field.value.length === 1) {
-                                field.value = field.value[0];
-                            }
-                        }
-                    }
-                    break;
-            }
-            return field;
-        },
-
         removeSuite: function(event) {
             event.preventDefault();
 
@@ -173,12 +112,6 @@ define([
             element.remove();
             this.collectionForRun.remove(model);
             this.updateIndexNumber();
-        },
-
-        findModel: function(id) {
-            return function(model) {
-              return model.get('id') === id;
-            };
         },
 
         showSuiteSettings: function(event) {
