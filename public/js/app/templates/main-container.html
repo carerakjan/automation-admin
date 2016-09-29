@@ -15,14 +15,13 @@
 
         <% _.each(data, function(suite){ %>
 
-        <div class="palette-item" data-suite-id="<%= suite.get('id') %>">
+        <div class="palette-item" data-suite-id="<%= suite.name %>">
             <div class="palette palette-asbestos">
                 <span class="item padding-hor-10">
-                <%= suite.get('metaData') && suite.get('metaData').title
-                ? suite.get('metaData').title : suite.get('id') %>
+                <%= suite.title ? suite.title : suite.name %>
                 </span>
                 <span class="fui-arrow-right pull-right"></span>
-                <% if(suite.get('metaData') && suite.get('metaData').customFields) { %>
+                <% if(suite.form) { %>
                 <span class="fui-gear pull-right hide transition padding-hor-10"></span>
                 <% } %>
             </div>

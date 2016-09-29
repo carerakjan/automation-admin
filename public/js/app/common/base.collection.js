@@ -11,14 +11,17 @@ define([
             this.trigger('fetch:error', data.error);
         },
 
-        fetchSuccess: function(data) {
-            this.add(data);
+        fetchSuccess: function(data, options) {
+            this.add(data, options);
+            console.log(this.toJSON());
             this.trigger('fetch:success');
         },
 
-        handleFetchingData: function(data) {
-            if(data.error) this.fetchError(data);
-            else this.fetchSuccess(data);
+        handleFetchingData: function(options) {
+            return function(data) {
+                if(data.error) this.fetchError(data, options);
+                else this.fetchSuccess(data, options);
+            }.bind(this);
         }
 
     });

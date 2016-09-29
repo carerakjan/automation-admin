@@ -15,7 +15,7 @@ define([
 
         initialize: function(){
             BaseView.prototype.initialize.apply(this, arguments);
-            this.collection = new SuitesCollection();
+            this.collection = new SuitesCollection(null, {parse: true});
             this.listenTo(this.collection, 'fetch:error fetch:success', this.render.bind(this));
             this.options.app && this.options.app.on('app:useAutomation', this.toggleElement.bind(this));
             this.collection.fetch();
@@ -43,7 +43,7 @@ define([
             if(error) {
                 this.$el.html(this.template({ data: { error: error} }));
             } else {
-                this.$el.html(this.template({ data: this.collection.models }));
+                this.$el.html(this.template({ data: this.collection.toJSON() }));
                 this.initDragAndDrop();
             }
         },
@@ -90,16 +90,16 @@ define([
 
         addSuite: function(el) {
             var suiteId = el.dataset['suiteId'];
-            var model = this.collection.find(this.findModel(suiteId));
+            var model = this.collection.find({name: suiteId});
 
-            this.collectionForRun.add(this.convertModel(this.deepCopy(model.toJSON())));
+            this.collectionForRun.add(this.deepCopy(model.toJSON()));
             model = this.collectionForRun.at(this.collectionForRun.length - 1);
             el.dataset['uniqueId'] = model.get('_id');
         },
 
         deepCopy: function(obj) {
-            //this is not ideal variant
-            return JSON.parse(JSON.stringify(obj))
+            //this is temporary solution
+            return obj;
         },
 
         convertModel: function(model) {
