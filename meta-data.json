@@ -58,8 +58,10 @@
       "name": "movie",
       "label": "What movies do you like?",
       "group": [
-        { "label": "Comedy", "checked": true  },
-        { "label": "Science fiction"  }
+        { "label": "Fantasy"  },
+        { "label": "Science fiction", "checked": true  },
+        { "label": "Horror", "checked": false  },
+        { "label": "Comedy", "checked": true  }
       ],
       "description": "This is small text under the field"
     },
@@ -69,8 +71,8 @@
       "name": "platform",
       "label": "Please select a platform",
       "options": [
-        {"text": "mobile"},
-        {"text": "tablet", "selected": true}
+        {"text": "mobile", "selected": true},
+        {"text": "tablet"}
       ]
     },
 
@@ -82,6 +84,10 @@
         {"label": "mobile", "options": [
           {"text":"iphone 6"},
           {"text":"asus zenfone 5", "selected":true}
+        ]},
+        {"label": "tablet", "options": [
+          {"text":"ipad mini"},
+          {"text":"asus padfone 2", "selected":true}
         ]}
       ]
     },

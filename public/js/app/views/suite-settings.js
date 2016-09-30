@@ -16,7 +16,7 @@ define([
 
         render: function(options) {
             this.model = options.model;
-            this.form = this.model.get('customFields');
+            this.form = this.model.get('form');
             this.$el = $(this.template({
                 templateFn: _.template(formTemplate),
                 form: this.form
@@ -101,7 +101,7 @@ define([
             var _form = this.groupByName(form);
             return function(field) {
                 var ff = _.find(_form, {name: field.name});
-                if(/^checkbox|radio|switch$/.test(field['component']) && !ff) {
+                if(/^Checkbox|Radio|Switch$/.test(field.className) && !ff) {
                     return field.value = 'off';
                 } else if(!ff) {
                     return;

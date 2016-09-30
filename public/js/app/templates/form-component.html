@@ -1,24 +1,22 @@
 <div class="form-group">
 
-    <% if ( field.component !== 'checkbox' &&
-            field.component !== 'radio' && field.label ) { %>
+    <% if ( field.className !== 'Checkbox' &&
+            field.className !== 'Radio' && field.label ) { %>
         <label><%= field.label %></label>
     <% } %>
 
-    <% if(field.component === 'input') { %>
+    <% if(field.className === 'Input') { %>
         <input
                 class="fui-input form-control"
                 type="<%= field.type %>"
                 name="<%= field.name %>"
-                value="<%= field.value ? field.value : (field.default ? field.default : '') %>"
-                placeholder="<%= field.label ? field.label : '' %>"
-                <%if (field.validation) { %>
-                    <% if (field.validation.min) { %> minlength="<%= field.validation.min %>" <% } %>
-                    <% if (field.validation.max) { %> maxlength="<%= field.validation.max %>" <% } %>
-                <% } %>>
+                value="<%= field.value %>"
+                placeholder="<%= field.label %>"
+                <% if (field.validation.min) { %> minlength="<%= field.validation.min %>" <% } %>
+                <% if (field.validation.max) { %> maxlength="<%= field.validation.max %>" <% } %>>
     <% } %>
 
-    <% if(field.component === 'checkbox') { %>
+    <% if(field.className === 'Checkbox') { %>
 
         <% if(field.group) { %>
 
@@ -32,9 +30,7 @@
                             name="<%= field.name %>"
                             class="fui-checkbox custom-checkbox"
                             value="<%= checkbox.label %>"
-                            <% if(!field.value && checkbox.checked) { %> checked
-                            <% } else if(field.value && typeof(field.value) === 'string' && field.value === checkbox.label) { %> checked
-                            <% } else if(field.value && Array.isArray(field.value) && ~field.value.indexOf(checkbox.label)) { %> checked <% } %>>
+                            <% if(~field.value.indexOf(checkbox.label)) { %> checked <% } %>>
                     <%= checkbox.label %>
                 </label>
             <% }); %>
@@ -46,15 +42,13 @@
                         data-toggle="checkbox"
                         name="<%= field.name %>"
                         class="fui-checkbox custom-checkbox"
-                        <% if(field.value && field.value === 'on') { %> checked
-                        <% } else if(field.value && field.value === 'off') { %>
-                        <% } else if(field.checked) { %> checked <% } %>>
+                        <% if(field.value === 'on') { %> checked <% } %>>
                 <%= field.label %>
             </label>
         <% } %>
     <% } %>
 
-    <% if(field.component === 'radio') { %>
+    <% if(field.className === 'Radio') { %>
 
         <% if(field.group) { %>
 
@@ -68,8 +62,7 @@
                             name="<%= field.name %>"
                             class="fui-radio custom-radio"
                             value="<%= radio.label %>"
-                            <% if(field.value && field.value === radio.label) { %> checked
-                            <% } else if(radio.checked) { %> checked <% } %>>
+                            <% if(field.value === radio.label) { %> checked <% } %>>
                     <%= radio.label %>
                 </label>
             <% }); %>
@@ -81,15 +74,13 @@
                         data-toggle="radio"
                         name="<%= field.name %>"
                         class="fui-radio custom-radio"
-                        <% if(field.value && field.value === 'on') { %> checked
-                        <% } else if(field.value && field.value === 'off') { %>
-                        <% } else if(field.checked) { %> checked <% } %>>
+                        <% if(field.value === 'on') { %> checked <% } %>>
                 <%= field.label %>
             </label>
         <% } %>
     <% } %>
 
-    <% if(field.component === 'select') { %>
+    <% if(field.className === 'Select') { %>
         <select
                 name="<%= field.name %>"
                 class="fui-select form-control select select-inverse select-block mbl"
@@ -98,8 +89,7 @@
                 <optgroup label="<%= group.label %>">
                     <% _.each(group.options, function(option) { %>
                         <option value="<%= option.text %>"
-                            <% if(!field.value && option.selected) { %> selected
-                            <% } else if(field.value && option.text === field.value) { %> selected <% } %>>
+                            <% if(option.text === field.value) { %> selected <% } %>>
                             <%= option.text %>
                         </option>
                     <% }); %>
@@ -108,8 +98,7 @@
 
             <% _.each(field.options, function(option) { %>
                 <option value="<%= option.text %>"
-                    <% if(!field.value && option.selected) { %> selected
-                    <% } else if(field.value && option.text === field.value) { %> selected <% } %>>
+                    <% if(option.text === field.value) { %> selected <% } %>>
                     <%= option.text %>
                 </option>
             <% }); %>
@@ -117,7 +106,7 @@
         </select>
     <% } %>
 
-    <% if(field.component === 'switch') { %>
+    <% if(field.className === 'Switch') { %>
         <div>
             <input
                     type="checkbox"
@@ -125,17 +114,14 @@
                     name="<%= field.name %>"
                     class="fui-switch"
                     data-on-color="primary"
-                    <% if(field.value && field.value === 'on') { %> checked
-                    <% } else if(field.value && field.value === 'off') { %>
-                    <% } else if(field.checked) { %> checked <% } %>
-                    <% if(field.actionText) { %>
+                    <% if(field.value === 'on') { %> checked <% } %>
+                    <% if(Object.keys(field.actionText).length) { %>
                         data-on-text="<%= field.actionText.on %>"
                         data-off-text="<%= field.actionText.off %>"
                     <% } else { %>
                         data-on-text="<i class='fui-check'></i>"
                         data-off-text="<i class='fui-cross'></i>"
-                    <% } %>
-            >
+                    <% } %>>
         </div>
     <% } %>
 
