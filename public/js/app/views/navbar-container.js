@@ -55,13 +55,22 @@ define([
             if(this.isValidUrl(this.$('#urlInput').val())) {
                 this.options.app.trigger('app:eraseReports');
                 this.model.set('url', this.$('#urlInput').val());
-                socket.emit('run_bs', this.prepareData(this.model.toJSON()));
+                socket.emit('run_bs', this.prepareData(this.model.toJSON()), this.submitFormCallback.bind(this));
+            }
+        },
+
+        submitFormCallback: function(response) {
+            if(response.error) {
+                this.options.app.trigger('app:notify', {
+                    connection: [null, 'error', response.error]
+                });
             }
         },
 
         prepareData: function(model) {
             var result = {};
             var _model = this.deepCopy(model);
+            result.url = model.url;
             result.platform = model.activePlatform;
             _model.useAutomation && _model.suites.length &&
             (result.suites = this.parseMetaData(this.removeIDs(_model.suites)));
@@ -81,13 +90,12 @@ define([
 
         parseMetaData: function(collection) {
             return collection.map(function(model) {
-                if(!model['customFields']) return model;
-                var customFields = model['customFields'];
-                delete model['customFields'];
+                if(!model.form) return model;
+                var form = model.form;
+                delete model.form;
 
-                return customFields.reduce(function(metaData, field){
-                    var value = field.value || field.default;
-                    value && (metaData[field.name] = value);
+                return form.reduce(function(metaData, field){
+                    metaData[field.name] = field.value;
                     return metaData;
                 }, model.metaData = {}) && model;
             });
