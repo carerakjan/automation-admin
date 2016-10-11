@@ -1,68 +1,58 @@
-<div class="container-fluid">
+<div class="container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-3">
             <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="#">Admin panel</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="navbar-collapse-3">
 
-        <form class="navbar-form navbar-left" id="formRunBs">
-
-            <div class="input-group">
-                <span class="input-group-btn">
-                  <button id="runBs" class="btn btn-default" type="button">Run</button>
-                </span>
-                <input
-                        id="urlInput"
-                        name="urlInput"
-                        type="text"
-                        class="form-control"
-                        placeholder="Portal URL">
+        <form class="navbar-form navbar-left" role="form">
+            <div class="form-group">
+                <input id="urlInput" name="urlInput" type="text" class="form-control" placeholder="Portal URL">
             </div>
-
-            <div id="platform" class="input-group">
-
-                <div class="btn-group">
-                    <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle" type="button">
-                        <span class="value">Platform - <b>all</b></span> <span class="caret"></span>
-                    </button>
-                    <ul role="menu" class="dropdown-menu">
-                        <% _.each(platforms, function(platform) { %>
-                            <li <%= (platform === 'all') ? 'class="active"' : '' %> >
-                                <a href="javascript:void(0);"><%= platform %></a>
-                            </li>
-                        <% }) %>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="input-group">
-                <label class="checkbox" for="useAutomation">
-                    <input
-                            checked
-                            type="checkbox"
-                            id="useAutomation"
-                            name="useAutomation"
-                            data-toggle="checkbox"
-                            class="custom-checkbox">
-
-                    <span class="icons">
-                        <span class="icon-unchecked"></span>
-                        <span class="icon-checked"></span>
-                    </span>
-
-                    Use auto script
-
-                </label>
-            </div>
-
+            <button id="runBs" type="button" class="btn btn-default">Run</button>
         </form>
-    </div>
+
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown" id="folderFilter">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="fui-folder"></span> Folder <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu folder-list checkbox-list">
+                    <li class="active"><a href="#"><span class="fui-check"></span>all</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#"><span class="fui-check"></span>candy-theme</a></li>
+                    <li><a href="#" class="second-level"><span class="fui-check"></span>candy-theme-dark</a></li>
+                    <li><a href="#" class="third-level"><span class="fui-check"></span>candy-theme-dark-1</a></li>
+                    <li><a href="#" class="third-level"><span class="fui-check"></span>candy-theme-dark-2</a></li>
+                    <li><a href="#"><span class="fui-check"></span>candy-theme</a></li>
+                    <li><a href="#" class="second-level"><span class="fui-check"></span>candy-theme-dark</a></li>
+                    <li><a href="#" class="third-level"><span class="fui-check"></span>candy-theme-dark-1</a></li>
+                    <li><a href="#" class="third-level"><span class="fui-check"></span>candy-theme-dark-2</a></li>
+                </ul>
+            </li>
+
+            <li class="dropdown" id="navSettings">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="visible-sm visible-xs">Settings<span class="fui-gear"></span></span>
+                    <span class="visible-md visible-lg"><span class="fui-gear"></span></span>
+                </a>
+                <ul class="dropdown-menu fn-multi-select checkbox-list">
+                    <li class="active">
+                        <a href="#" id="useAutomation" name="useAutomation">
+                            <span class="fui-check"></span> Use automation</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="disabled"><a href="#"><span class="fui-check"></span>Allow IP</a></li>
+                    <li class="disabled"><a href="#"><span class="fui-check"></span>Allow Port</a></li>
+                    <li class="disabled"><a href="#"><span class="fui-check"></span>Allow GET params</a></li>
+                </ul>
+            </li>
+
+        </ul>
+    </div><!-- /.navbar-collapse -->
 </div>

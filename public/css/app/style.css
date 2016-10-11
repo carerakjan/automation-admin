@@ -145,6 +145,33 @@
 }
 
 /*--- navbar ---*/
+.checkbox-list li {
+    position: relative;
+}
+
+.checkbox-list li a{
+    padding-left: 26px;
+}
+
+.checkbox-list .fui-check {
+    display: none;
+    position: absolute;
+    left: 8px;
+    top: 8px;
+}
+
+.checkbox-list .active .fui-check {
+    display: inline;
+}
+
+.folder-list .second-level {
+    padding-left: 36px;
+}
+
+.folder-list .third-level {
+    padding-left: 46px;
+}
+
 #formRunBs .input-group {
     padding: 0 1em;
     width: auto;
